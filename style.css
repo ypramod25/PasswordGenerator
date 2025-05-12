@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+  
+  input[type="number"], input[type="checkbox"] {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  #passwordContainer {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #password {
+    padding: 10px;
+    background: #eee;
+    border-radius: 5px;
+    word-break: break-word;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  #copyBtn {
+    background-color: #007BFF;
+  }
+  
+  #copyBtn:hover {
+    background-color: #0069d9;
+  }
+  #strength {
+    margin-top: 5px;
+    font-weight: bold;
+  }
+  
+  .strength-weak {
+    color: red;
+  }
+  
+  .strength-medium {
+    color: orange;
+  }
+  
+  .strength-strong {
+    color: green;
+  }
+  
