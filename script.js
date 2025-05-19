@@ -1,34 +1,67 @@
 function generatePassword() {
-    const length = document.getElementById('length').value;
-    const uppercase = document.getElementById('uppercase').checked;
-    const lowercase = document.getElementById('lowercase').checked;
-    const numbers = document.getElementById('numbers').checked;
-    const special = document.getElementById('special').checked;
-  
-    let charset = '';
-    if (uppercase) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    if (lowercase) charset += 'abcdefghijklmnopqrstuvwxyz';
-    if (numbers) charset += '0123456789';
-    if (special) charset += '!@#$%^&*()_+{}:"<>?|[];,./`~';
-  
-    const passwordContainer = document.getElementById('password');
-    const strengthContainer = document.getElementById('strength');
-  
-    if (charset === '') {
-      passwordContainer.innerText = 'Please select at least one option!';
-      strengthContainer.innerText = '';
-      return;
-    }
-  
-    let password = '';
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      password += charset[randomIndex];
-    }
-  
-    passwordContainer.innerText = password;
-    showStrength(password);
+  const length = parseInt(document.getElementById('length').value);
+  const uppercase = document.getElementById('uppercase').checked;
+  const lowercase = document.getElementById('lowercase').checked;
+  const numbers = document.getElementById('numbers').checked;
+  const special = document.getElementById('special').checked;
+
+  const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+  const numberChars = '0123456789';
+  const specialChars = '!@#$%^&*()_+{}:"<>?|[];,./`~';
+
+  let allChars = '';
+  let password = '';
+
+  const requiredChars = [];
+
+  if (uppercase) {
+    allChars += uppercaseChars;
+    requiredChars.push(randomChar(uppercaseChars));
   }
+  if (lowercase) {
+    allChars += lowercaseChars;
+    requiredChars.push(randomChar(lowercaseChars));
+  }
+  if (numbers) {
+    allChars += numberChars;
+    requiredChars.push(randomChar(numberChars));
+  }
+  if (special) {
+    allChars += specialChars;
+    requiredChars.push(randomChar(specialChars));
+  }
+
+  const passwordContainer = document.getElementById('password');
+  const strengthContainer = document.getElementById('strength');
+
+  if (allChars === '') {
+    passwordContainer.innerText = 'Please select at least one option!';
+    strengthContainer.innerText = '';
+    return;
+  }
+
+  // Fill the rest of the password
+  for (let i = requiredChars.length; i < length; i++) {
+    password += randomChar(allChars);
+  }
+
+  // Shuffle final password (to mix required characters)
+  password += requiredChars.join('');
+  password = shuffleString(password);
+
+  passwordContainer.innerText = password;
+  showStrength(password);
+}
+
+function randomChar(str) {
+  return str[Math.floor(Math.random() * str.length)];
+}
+
+function shuffleString(str) {
+  return str.split('').sort(() => 0.5 - Math.random()).join('');
+}
+
   
   function showStrength(password) {
     const strengthContainer = document.getElementById('strength');
